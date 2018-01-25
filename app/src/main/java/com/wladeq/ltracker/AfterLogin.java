@@ -13,7 +13,7 @@ public class AfterLogin extends AppCompatActivity {
         setContentView(R.layout.activity_po_login);
 
     }
-
+//12
     public void qwe(View view) {
         Intent intent = new Intent (this,MapsActivity.class);
         startActivity(intent);
