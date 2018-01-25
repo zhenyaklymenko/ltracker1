@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "435291503668",
+    "firebase_url": "https://ltracker-lodz.firebaseio.com",
+    "project_id": "ltracker-lodz",
+    "storage_bucket": "ltracker-lodz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435291503668:android:fbd5be4f73bfd4ea",
+        "android_client_info": {
+          "package_name": "com.wladeq.ltracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435291503668-i7jh2801k0s7atum0lo8b1gbe2rkfclt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wladeq.ltracker",
+            "certificate_hash": "9b9dea99c021aea35c4f1cb3d2a2a36687e41b5f"
+          }
+        },
+        {
+          "client_id": "435291503668-lsrk85ie7oi3lc28m5ndmrkhg7imp6sl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPTwnTteBq5pFbTaIyPbtTy9_pjP0xzA4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435291503668-lsrk85ie7oi3lc28m5ndmrkhg7imp6sl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
