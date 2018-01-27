@@ -12,7 +12,7 @@
         android:layout_width="149dp"
         android:layout_height="46dp"
         android:shadowColor="@android:color/black"
-        android:text="LOGIN"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"

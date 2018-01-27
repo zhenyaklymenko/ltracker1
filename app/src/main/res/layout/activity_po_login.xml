@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.wladeq.ltracker.AfterLogin">
+    tools:context="com.wladeq.ltracker.ListOfTracks">
 
     <Button
         android:id="@+id/button2"

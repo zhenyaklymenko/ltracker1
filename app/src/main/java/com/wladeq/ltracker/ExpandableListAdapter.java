@@ -1,5 +1,6 @@
 package com.wladeq.ltracker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -15,13 +16,13 @@ import java.util.List;
  * Created by VladyslavIgnatenko on 24.01.2018.
  */
 
-public class ExpandeblaListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHashMap;
 
-    public ExpandeblaListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listHashMap) {
+    ExpandableListAdapter(Context context, List<String> listDataHeader,
+                          HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -62,28 +63,32 @@ public class ExpandeblaListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         String headerTitle = (String)getGroup(i);
         if(view==null){
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             view = inflater.inflate(R.layout.list_group,null);
         }
-        TextView lbListHeader = (TextView)view.findViewById(R.id.ibListHeader);
+        TextView lbListHeader = view.findViewById(R.id.ibListHeader);
         lbListHeader.setText(headerTitle);
         lbListHeader.setTypeface(null, Typeface.BOLD);
         return view;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         final String childText = (String) getChild(i,i1);
         if(view==null){
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             view = inflater.inflate(R.layout.list_item,null);
         }
 
-        TextView txtListChild = (TextView)view.findViewById(R.id.idListItem);
+        TextView txtListChild = view.findViewById(R.id.idListItem);
         txtListChild.setText(childText);
         return view;
     }

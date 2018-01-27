@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==LOGIN_PERMISSION){
-            startNewActivity(resultCode,data);
+            startNewActivity(resultCode);
         }
     }
 
-    private void startNewActivity(int resultCode, Intent data) {
+    private void startNewActivity(int resultCode) {
         if(resultCode==RESULT_OK){
-            Intent intent = new Intent (this,AfterLogin.class);
+            Intent intent = new Intent (this,ListOfTracks.class);
             startActivity(intent);
             finish();
         }
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLogin=(Button)findViewById(R.id.btnSingIn);
+        btnLogin= findViewById(R.id.btnSingIn);
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

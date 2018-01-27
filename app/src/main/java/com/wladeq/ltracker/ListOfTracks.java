@@ -10,19 +10,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AfterLogin extends AppCompatActivity {
+public class ListOfTracks extends AppCompatActivity {
 
-    private ExpandableListView listView;
-    private ExpandeblaListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_po_login);
-        listView = (ExpandableListView) findViewById(R.id.ExView);
+        ExpandableListView listView = findViewById(R.id.ExView);
         initData();
-        listAdapter= new ExpandeblaListAdapter(this,listDataHeader,listHash);
+        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
     }
 

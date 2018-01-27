@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Ltracker</string>
-    <string name="test_gmail_com">test@gmail.com</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_maps">Map</string>
     <string name="lets_start">Let\'s start!</string>
     <string name="my_previous_rides">My previous rides:</string>
+    <string name="login">LOGIN</string>
 </resources>
