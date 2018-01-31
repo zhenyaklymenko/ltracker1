@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         AuthUI.getInstance().createSignInIntentBuilder()
                         .setAllowNewEmailAccounts(true).build(),LOGIN_PERMISSION
                 );
-            }});
+            }
+        });
 
-    }}
+    }
+}
