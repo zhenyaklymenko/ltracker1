@@ -35,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+    LatLng route;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,9 +111,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        if (mCurrLocationMarker != null) {
+      /*  if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
-        }
+        }*/
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -125,6 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
 
         //stop location updates
         if (mGoogleApiClient != null) {

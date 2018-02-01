@@ -7,50 +7,39 @@
     android:background="@drawable/tlo"
     tools:context="com.wladeq.ltracker.MainActivity">
 
-    <com.andexert.library.RippleView
-        android:id="@+id/more"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:rv_centered="true">
-    </com.andexert.library.RippleView>
-
     <Button
         android:id="@+id/btnSingIn"
         android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
-        android:background="@drawable/button"
-        app:layout_constraintBottom_toTopOf="@+id/btnContact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/more" />
-
-    <com.andexert.library.RippleView
-        android:id="@+id/more1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:rv_centered="true">
-    </com.andexert.library.RippleView>
-
-    <Button
-        android:id="@+id/btnContact"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/button2"
+        android:background="@drawable/login"
+        android:fontFamily="@font/bkant_bold"
+        android:text="LOGIN"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSingIn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnContactUs"
+        app:layout_constraintVertical_bias="0.129" />
+
+    <Button
+        android:id="@+id/btnContactUs"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginStart="8dp"
+        android:background="@drawable/login"
+        android:fontFamily="@font/bkant_bold"
+        android:text="CONTACT US"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
