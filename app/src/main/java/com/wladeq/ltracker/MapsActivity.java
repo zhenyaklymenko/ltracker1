@@ -147,6 +147,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
                 // Prompt the user once explanation has been shown
+
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
