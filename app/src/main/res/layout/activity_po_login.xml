@@ -12,7 +12,7 @@
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:onClick="startRide"
+        android:onClick="letsStart"
         android:text="@string/lets_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAllowNewEmailAccounts(true).build(),LOGIN_PERMISSION
                 );
             }
+
         });
 
     }

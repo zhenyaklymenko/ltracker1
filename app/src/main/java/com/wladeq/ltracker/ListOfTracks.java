@@ -24,7 +24,7 @@ public class ListOfTracks extends AppCompatActivity {
         listView.setAdapter(listAdapter);
     }
 
-    public void startRide(View view) {
+    public void letsStart(View view) {
         Intent intent = new Intent (this,MapsActivity.class);
         startActivity(intent);
     }
