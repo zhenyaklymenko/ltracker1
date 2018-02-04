@@ -4,22 +4,16 @@ import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.location.Address;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.telephony.CellIdentityCdma;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.text.format.DateFormat;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -38,9 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.SQLClientInfoException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -52,13 +44,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    LatLng route;
-    int i=0;
+    int i=1,startMarker;
+    CharSequence date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -66,6 +56,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+        Date d = new Date();
+        date  = DateFormat.format("MMMM d, yyyy ", d.getTime());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -119,6 +111,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
+
+
     }
 
     @Override
@@ -134,31 +128,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-
+        /*
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
-        }
-
-        AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-        Account[] accounts = manager.getAccounts();
+        }*/
+        //Get user email
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String email = user.getEmail();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("email"+i++);
-        myRef.setValue(email);
+        String emailD = user != null ? user.getEmail() : null;
 
+        //Delete dots form email
+        String email = emailD != null ? emailD.replaceAll("\\.", "") : null;
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Start position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+        //Place start marker
+        if (startMarker==0) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Start position");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            mCurrLocationMarker = mMap.addMarker(markerOptions);
+            startMarker++;
+        }
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef1 = database.getReference("Date: " + date+ "/" + email
+                + "/" +  "track nr - " + i++);
+        myRef1.setValue(latLng);
 
        /* FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("location" + i++);
@@ -166,7 +166,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         i++;*/
         // new RouteSaver(latLng);
         //stop location updates
-      /*  if (mGoogleApiClient != null) {
+    /*    if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }*/
     }
