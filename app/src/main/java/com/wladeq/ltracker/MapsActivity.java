@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -138,17 +140,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
-        assert manager != null;
-        Account[] list = manager.getAccounts();
-        String gmail;
-        String a;
-
-        for(Account account: list){
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("username :");
-            myRef.setValue(account.name);
-        }
-
+        Account[] accounts = manager.getAccounts();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = user.getEmail();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("email"+i++);
+        myRef.setValue(email);
 
 
         //Place current location marker
