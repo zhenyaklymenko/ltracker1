@@ -23,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -151,6 +152,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mCurrLocationMarker = mMap.addMarker(markerOptions);
             startMarker++;
         }
+
+        MarkerOptions doteMarkerOptions = new MarkerOptions();
+        doteMarkerOptions.position(latLng);
+        doteMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.dot_red));
+        mCurrLocationMarker = mMap.addMarker(doteMarkerOptions);
+        startMarker++;
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
