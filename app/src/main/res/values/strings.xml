@@ -5,4 +5,10 @@
     <string name="my_previous_rides">My previous rides:</string>
     <string name="login">LOGIN</string>
     <string name="contact_us">CONTACT US</string>
+    <string name="contact_us_btn">Contact us</string>
+    <string name="face">facebook.com/group/ltracker</string>
+    <string name="tel">+48 788 574 987</string>
+    <string name="meil">ltrackerteam@gmail.com</string>
+    <string name="ltacker_pl">ltacker.pl</string>
+    <string name="adres">Lodz, Rzgowska 17A</string>
 </resources>
