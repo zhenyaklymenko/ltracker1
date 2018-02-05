@@ -164,15 +164,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 + "/" +  "track nr - " + i++);
         myRef1.setValue(latLng);
 
-       /* FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("location" + i++);
-        myRef.setValue(latLng);
-        i++;*/
-        // new RouteSaver(latLng);
-        //stop location updates
-    /*    if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }*/
     }
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public void checkLocationPermission(){
