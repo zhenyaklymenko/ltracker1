@@ -1,6 +1,7 @@
 package com.wladeq.ltracker;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,4 +61,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent (this,ContactUs.class);
         startActivity(intent);
     }
+
+
 }
