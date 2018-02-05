@@ -6,4 +6,7 @@
     <color name="white">#FFFF</color>
     <color name="purple">#008aff</color>
     <color name="red">#003d99</color>
+    <color name= "inv">#0D000000</color>
+    <color name="lightGray">#949494</color>
+    <color name="satanicGray">#666666</color>
 </resources>

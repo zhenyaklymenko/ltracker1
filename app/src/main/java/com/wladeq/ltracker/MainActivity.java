@@ -55,4 +55,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void contact(View view) {
+        Intent intent = new Intent (this,ContactUs.class);
+        startActivity(intent);
+    }
 }
