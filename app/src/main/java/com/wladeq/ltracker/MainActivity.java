@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Login failed", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivityForResult(
                         AuthUI.getInstance().createSignInIntentBuilder()
-                        .setAllowNewEmailAccounts(true).build(),LOGIN_PERMISSION
-                );
+                        .setAllowNewEmailAccounts(false).build(),LOGIN_PERMISSION);
             }
 
         });

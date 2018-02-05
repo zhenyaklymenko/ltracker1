@@ -2,6 +2,7 @@ package com.wladeq.ltracker;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest mLocationRequest;
     int i=1,startMarker;
     CharSequence date;
+    LatLng lastLoc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }*/
+
         //Get user email
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String emailD = user != null ? user.getEmail() : null;
@@ -150,15 +155,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startMarker++;
         }
 
+        if (lastLoc != null) {
+            PolylineOptions pLineOptions = new PolylineOptions()
+                    .clickable(true)
+                    .add(lastLoc)
+                    .add(latLng)
+                    .color(Color.GREEN);
+            Polyline polyline = mMap.addPolyline(pLineOptions);
+            lastLoc = latLng;
+        } else {
+            lastLoc = latLng;
+        }
+        /*
         MarkerOptions doteMarkerOptions = new MarkerOptions();
         doteMarkerOptions.position(latLng);
         doteMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.dot_red));
-        mCurrLocationMarker = mMap.addMarker(doteMarkerOptions);
+        mCurrLocationMarker = mMap.addMarker(doteMarkerOptions);*/
+
         startMarker++;
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //Save dots to firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("Date: " + date+ "/" + email
                 + "/" +  "track nr - " + i++);

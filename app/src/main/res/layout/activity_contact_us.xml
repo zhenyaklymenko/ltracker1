@@ -9,12 +9,11 @@
     tools:context="com.wladeq.ltracker.ContactUs"
     tools:layout_editor_absoluteY="25dp">
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/bkant_bold"
         android:text="@string/contact_us_btn"
@@ -23,7 +22,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="24dp" />
 
     <Button
         android:id="@+id/button"
@@ -237,28 +236,23 @@
     <Button
         android:id="@+id/button5"
         style="@style/NoBorderButton"
-        android:layout_width="wrap_content"
+        android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginBottom="8dp"
+        android:onClick="back"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="back"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="40dp"
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="@+id/button5"
         app:layout_constraintStart_toStartOf="@+id/button5"
         app:layout_constraintTop_toTopOf="@+id/button5"
-        app:srcCompat="@drawable/back"
-        android:contentDescription="@string/contact_us_btn" />
-
+        app:srcCompat="@drawable/ic_arrow_back_white_48dp"
+        android:contentDescription="@string/app_name" />
 
 </android.support.constraint.ConstraintLayout>

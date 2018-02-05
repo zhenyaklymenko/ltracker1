@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +16,11 @@ public class ListOfTracks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_po_login);
-        ExpandableListView listView = findViewById(R.id.ExView);
+        setContentView(R.layout.activity_after_login);
+        /*ExpandableListView listView = findViewById(R.id.ExView);
         initData();
         ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
-        listView.setAdapter(listAdapter);
+        listView.setAdapter(listAdapter);*/
     }
 
     public void letsStart(View view) {

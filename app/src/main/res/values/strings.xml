@@ -10,5 +10,7 @@
     <string name="tel">+48 788 574 987</string>
     <string name="meil">ltrackerteam@gmail.com</string>
     <string name="ltacker_pl">ltacker.pl</string>
-    <string name="adres">Lodz, Rzgowska 17A</string>
+    <string name="adres">Take me there!</string>
+    <string name="track_list">Track list</string>
+    <string name="start_race">Start race</string>
 </resources>
