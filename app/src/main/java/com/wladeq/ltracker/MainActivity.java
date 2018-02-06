@@ -11,6 +11,7 @@ import com.firebase.ui.auth.AuthUI;
 
 public class MainActivity extends AppCompatActivity {
 
+
     Button btnLogin;
     private final static int LOGIN_PERMISSION=1000;
 
