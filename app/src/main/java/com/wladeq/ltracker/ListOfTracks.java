@@ -24,6 +24,8 @@ public class ListOfTracks extends AppCompatActivity {
     }
 
     public void letsStart(View view) {
+        //DialogFr a = new DialogFr();
+        //a.show(getSupportFragmentManager(), "Notice");
         Intent intent = new Intent (this,MapsActivity.class);
         startActivity(intent);
     }
