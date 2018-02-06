@@ -11,7 +11,6 @@ import com.firebase.ui.auth.AuthUI;
 
 public class MainActivity extends AppCompatActivity {
 
-
     Button btnLogin;
     private final static int LOGIN_PERMISSION=1000;
 
@@ -46,13 +45,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     public void contact(View view) {
         Intent intent = new Intent (this,ContactUs.class);
         startActivity(intent);
     }
-
-
 }

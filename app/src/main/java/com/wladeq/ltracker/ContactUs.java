@@ -25,6 +25,7 @@ public class ContactUs extends AppCompatActivity {
         i.setData(Uri.parse(p));
         startActivity(i);
     }
+
     public void sendEmail(View view) {
         String a = "Podziękowanie";
         String b = "Dziękuję bardzo za taką przepiękną appkę!!";

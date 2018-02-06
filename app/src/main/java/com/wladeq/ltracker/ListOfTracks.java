@@ -64,4 +64,9 @@ public class ListOfTracks extends AppCompatActivity {
         listHash.put(listDataHeader.get(2),thirdR);
         listHash.put(listDataHeader.get(3),fourthR);
     }
+
+    public void logout(View view) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }
