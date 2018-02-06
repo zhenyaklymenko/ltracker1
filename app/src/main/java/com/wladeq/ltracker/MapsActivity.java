@@ -33,7 +33,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -101,7 +100,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         DatabaseReference myRef = database.getReference("tracks/" + insNum + timest + "/instructorUid");
         myRef.setValue(insNum);
 
-
         //Write student to Firebase
         FirebaseDatabase database1 = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest + "/studentUid");
@@ -129,6 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
