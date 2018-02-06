@@ -17,6 +17,8 @@ public class ListOfTracks extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_login);
+        DialogFr a = new DialogFr();
+        a.show(getSupportFragmentManager(), "Instructor choice");
         /*ExpandableListView listView = findViewById(R.id.ExView);
         initData();
         ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
@@ -24,8 +26,6 @@ public class ListOfTracks extends AppCompatActivity {
     }
 
     public void letsStart(View view) {
-        //DialogFr a = new DialogFr();
-        //a.show(getSupportFragmentManager(), "Notice");
         Intent intent = new Intent (this,MapsActivity.class);
         startActivity(intent);
     }

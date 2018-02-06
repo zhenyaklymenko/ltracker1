@@ -33,6 +33,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -48,22 +50,69 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     int i=1,startMarker;
     CharSequence date;
     LatLng lastLoc = null;
+    String insNum;
+    long timest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+        //Date and timestamp
         Date d = new Date();
         date  = DateFormat.format("MMMM d, yyyy ", d.getTime());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        timest = timestamp.getTime();
 
+        //Find where we should show the map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Get Uid of current instructor
+        InstructorChoose a = new InstructorChoose();
+        insNum = a.backer();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String studentUid = user != null ? user.getUid() : null;
+        String userEmail = user != null ? user.getEmail() : null;
+        String userRole = "0";
+
+        //If current client is new - store his data in Firebase
+        FirebaseDatabase database4 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef4 = database4.getReference("users/" + studentUid + "/email");
+        myRef4.setValue(userEmail);
+
+        FirebaseDatabase database5 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef5 = database5.getReference("users/" + studentUid + "/role");
+        myRef5.setValue(userRole);
+
+        FirebaseDatabase database6 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef6 = database6.getReference("users/" + studentUid + "/uid");
+        myRef6.setValue(studentUid);
+
+        //Write instructor to FireBase
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("tracks/" + insNum + timest + "/instructorUid");
+        myRef.setValue(insNum);
+
+
+        //Write student to Firebase
+        FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest + "/studentUid");
+        myRef1.setValue(studentUid);
+
+        //Write timestamp to Firebase
+        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef2 = database.getReference("tracks/" + insNum + timest + "/timestamp");
+        myRef2.setValue(timest);
+
+
     }
 
     /**
@@ -178,10 +227,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
+      /*  FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef2 = database.getReference("Tracks1/" + insNum + timest + "/timestamp:");
+        myRef2.setValue(timest);*/
+
         //Save dots to firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef1 = database.getReference("Date: " + date+ "/" + email
-                + "/" +  "track nr - " + i++);
+        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest +  "/points/" + i++);
         myRef1.setValue(latLng);
 
     }

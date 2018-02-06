@@ -58,6 +58,7 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".InstructorChoose" />
     </application>
 
 </manifest>
