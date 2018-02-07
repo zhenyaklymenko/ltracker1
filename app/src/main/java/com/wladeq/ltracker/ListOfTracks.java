@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class ListOfTracks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,7 +11,6 @@ import com.firebase.ui.auth.AuthUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnLogin;
     private final static int LOGIN_PERMISSION=1000;
 
     @Override
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLogin= findViewById(R.id.btnSingIn);
+        Button btnLogin = findViewById(R.id.btnSingIn);
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void contact(View view) {
-        Intent intent = new Intent (this,ContactUs.class);
+        Intent intent = new Intent (this,ContactUsActivity.class);
         startActivity(intent);
     }
 }

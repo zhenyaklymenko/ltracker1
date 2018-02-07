@@ -60,10 +60,10 @@
             </intent-filter>-->
 
         </activity>
-        <activity android:name=".ContactUs"
+        <activity android:name=".ContactUsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".InstructorChoose" />
+
     </application>
 
 </manifest>

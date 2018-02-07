@@ -1,27 +1,27 @@
 package com.wladeq.ltracker;
-import android.support.v7.app.AppCompatActivity;
 
-public class InstructorChoose extends AppCompatActivity{
+class InstructorChoose{
 
     private static int swit4;
 
-    public InstructorChoose(){
-
-    }
-
-    public void ins1(){
+    void ins1(){
          swit4 = 0;
     }
 
-    public void ins2(){
+    void ins2(){
         swit4 = 1;
     }
 
-    public void ins3(){
+    void ins3(){
         swit4 = 2;
     }
 
-    public  String backer(){
+
+/*    public void setSwit4(int swit4){
+        this.swit4 = swit4;
+    }*/
+
+    String backer(){
         if (swit4 == 0) {
             return "ucBNQA1WR3SM5fUgNdniVumm67r2";
         } else if (swit4 == 1){

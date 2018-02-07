@@ -42,16 +42,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
-    private Marker mCurrLocationMarker;
-    private LocationRequest mLocationRequest;
     private int i=1;
     private int startMarker;
-    CharSequence date;
     private LatLng lastLoc = null;
     private String insNum;
     private long timest;
-    int options;
 
 
     @Override
@@ -101,13 +96,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myRef.setValue(insNum);
 
         //Write student to Firebase
-        FirebaseDatabase database1 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest + "/studentUid");
-        myRef1.setValue(studentUid);
+        FirebaseDatabase database9 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef9 = database9.getReference("tracks/" + insNum + timest + "/studentUid");
+        myRef9.setValue(studentUid);
 
         //Write timestamp to Firebase
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef2 = database.getReference("tracks/" + insNum + timest + "/timestamp");
+        DatabaseReference myRef2 = database2.getReference("tracks/" + insNum + timest + "/timestamp");
         myRef2.setValue(timest);
     }
 
@@ -140,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle bundle) {
-        mLocationRequest = new LocationRequest();
+        LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
@@ -163,14 +158,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
-
-        //Get user email
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String emailD = user != null ? user.getEmail() : null;
-
-        //Delete dots form email
-        String email = emailD != null ? emailD.replaceAll("\\.", "") : null;
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -181,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.position(latLng);
             markerOptions.title("Start position");
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            mCurrLocationMarker = mMap.addMarker(markerOptions);
+            Marker mCurrLocationMarker = mMap.addMarker(markerOptions);
             startMarker++;
         }
 
