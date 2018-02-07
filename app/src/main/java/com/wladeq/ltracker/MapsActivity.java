@@ -1,6 +1,7 @@
 package com.wladeq.ltracker;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -11,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -52,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LatLng lastLoc = null;
     String insNum;
     long timest;
+    double distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +114,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         DatabaseReference myRef2 = database.getReference("tracks/" + insNum + timest + "/timestamp");
         myRef2.setValue(timest);
-
 
     }
 
@@ -172,10 +175,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String emailD = user != null ? user.getEmail() : null;
 
-        //Delete dots form email
+        //Delete dots from email
         String email = emailD != null ? emailD.replaceAll("\\.", "") : null;
 
-        //Place current location marker
+        //Get current location coordinates
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         //Place start marker
@@ -188,17 +191,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startMarker++;
         }
 
+
         if (lastLoc != null) {
-            PolylineOptions pLineOptions = new PolylineOptions()
-                    .clickable(true)
-                    .add(lastLoc)
-                    .add(latLng)
-                    .color(Color.GREEN);
-            Polyline polyline = mMap.addPolyline(pLineOptions);
-            lastLoc = latLng;
+            MapsActivity df = new MapsActivity();
+            distance = df.CalculationByDistance(latLng,lastLoc);
+            if (distance >100) {
+                PolylineOptions pLineOptions = new PolylineOptions()
+                        .clickable(true)
+                        .add(lastLoc)
+                        .add(latLng)
+                        .color(Color.GREEN);
+                Polyline polyline = mMap.addPolyline(pLineOptions);
+                lastLoc = latLng;
+            }else {
+                lastLoc = latLng;
+            }
+
         } else {
             lastLoc = latLng;
         }
+
         startMarker++;
 
         //move map camera
@@ -209,6 +221,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest +  "/points/" + i++);
         myRef1.setValue(latLng);
+
+        //Save distance
+        FirebaseDatabase database4 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef4 = database4.getReference("tracks/" + insNum + timest +  "/points/" + i++);
+        myRef4.setValue(distance);
 
     }
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -265,7 +282,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 }
 
     public void finishRec(View view) {
+        DialogFr a = new DialogFr();
+        a.show(getSupportFragmentManager(), "Instructor choice");
+    }
 
+    public double CalculationByDistance(LatLng StartP, LatLng EndP) {
+        int Radius = 6371;// radius of earth in Km
+        double lat1 = StartP.latitude;
+        double lat2 = EndP.latitude;
+        double lon1 = StartP.longitude;
+        double lon2 = EndP.longitude;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+        double meter = valueResult % 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
+                + " Meter   " + meterInDec);
+
+        return valueResult * 1000;
     }
 
 }
