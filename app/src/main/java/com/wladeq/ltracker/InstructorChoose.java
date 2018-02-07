@@ -3,7 +3,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class InstructorChoose extends AppCompatActivity{
 
-    static int swit4;
+    private static int swit4;
 
     public InstructorChoose(){
 

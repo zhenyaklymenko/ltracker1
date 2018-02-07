@@ -8,7 +8,6 @@
     tools:context="com.wladeq.ltracker.MainActivity">
 
     <Button
-        android:id="@+id/btnContactUs"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginBottom="25dp"

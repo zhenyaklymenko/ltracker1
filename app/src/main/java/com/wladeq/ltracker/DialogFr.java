@@ -20,7 +20,7 @@ public class DialogFr extends DialogFragment {
                 if (which == 0){
                     InstructorChoose a = new InstructorChoose();
                     a.ins1();
-                } else if (which ==1){
+                } if (which ==1){
                     InstructorChoose a = new InstructorChoose();
                     a.ins2();
                 } else {

@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,7 +34,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -43,15 +41,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationListener {
 
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
-    int i=1,startMarker;
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private Marker mCurrLocationMarker;
+    private LocationRequest mLocationRequest;
+    private int i=1;
+    private int startMarker;
     CharSequence date;
-    LatLng lastLoc = null;
-    String insNum;
-    long timest;
+    private LatLng lastLoc = null;
+    private String insNum;
+    private long timest;
+    int options;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +65,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             checkLocationPermission();
         }
         //Date and timestamp
-        Date d = new Date();
-        date  = DateFormat.format("MMMM d, yyyy ", d.getTime());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timest = timestamp.getTime();
 
@@ -81,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
-        String userRole = "0";
+        int Role = 0;
 
         //If current client is new - store his data in Firebase
         FirebaseDatabase database4 = FirebaseDatabase.getInstance();
@@ -90,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FirebaseDatabase database5 = FirebaseDatabase.getInstance();
         DatabaseReference myRef5 = database5.getReference("users/" + studentUid + "/role");
-        myRef5.setValue(userRole);
+        myRef5.setValue(Role);
 
         FirebaseDatabase database6 = FirebaseDatabase.getInstance();
         DatabaseReference myRef6 = database6.getReference("users/" + studentUid + "/uid");
@@ -110,8 +109,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         DatabaseReference myRef2 = database.getReference("tracks/" + insNum + timest + "/timestamp");
         myRef2.setValue(timest);
-
-
     }
 
     @Override
@@ -132,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
     }
-    protected synchronized void buildGoogleApiClient() {
+    private synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -211,8 +208,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myRef1.setValue(latLng);
 
     }
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    public void checkLocationPermission(){
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private void checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -265,7 +262,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 }
 
     public void finishRec(View view) {
-
+        CustomDialFrag a = new CustomDialFrag();
+        a.show(getSupportFragmentManager(), "Instructor choice");
     }
 
 }
