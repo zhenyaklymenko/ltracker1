@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/contact_us_page"
     android:orientation="vertical"
-    tools:context="com.wladeq.ltracker.ContactUs"
+    tools:context="com.wladeq.ltracker.ContactUsActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        android:onClick="map"
+        android:onClick="getDirectionToUs"
         />
 
     <Button
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3"
-        android:onClick="web"/>
+        android:onClick="redirectWebsite"/>
 
     <Button
         android:id="@+id/button3"
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:onClick="facebook"/>
+        android:onClick="redirectFB"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -239,7 +239,7 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginBottom="8dp"
-        android:onClick="back"
+        android:onClick="backToLogin"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

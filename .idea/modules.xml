@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ltracker1.iml" filepath="$PROJECT_DIR$/ltracker1.iml" />
+      <module fileurl="file://C:\Android\PagerIndicator1\ltracker2\ltracker1.iml" filepath="C:\Android\PagerIndicator1\ltracker2\ltracker1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ltracker2.iml" filepath="$PROJECT_DIR$/ltracker2.iml" />
     </modules>
   </component>
 </project>

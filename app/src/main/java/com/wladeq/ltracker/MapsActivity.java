@@ -1,7 +1,6 @@
 package com.wladeq.ltracker;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -11,8 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,8 +34,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.util.Date;
+
+//Ten klas wyświetła mapę i nagrywa lokację ucznia
+//punkty są zapisywane do bazy danych
+//przycisk 'Finish' kończy nagrywanie
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -46,16 +45,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationListener {
 
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
-    int i=1,startMarker;
-    CharSequence date;
-    LatLng lastLoc = null;
-    String insNum;
-    long timest;
-    double distance;
+    private GoogleApiClient mGoogleApiClient;
+    private int i=1;
+    private int startMarker;
+    private LatLng lastLoc = null;
+    private String insNum;
+    private long timest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +64,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             checkLocationPermission();
         }
         //Date and timestamp
-        Date d = new Date();
-        date  = DateFormat.format("MMMM d, yyyy ", d.getTime());
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timest = timestamp.getTime();
 
@@ -85,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
-        String userRole = "0";
+        int Role = 0;
 
         //If current client is new - store his data in Firebase
         FirebaseDatabase database4 = FirebaseDatabase.getInstance();
@@ -94,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FirebaseDatabase database5 = FirebaseDatabase.getInstance();
         DatabaseReference myRef5 = database5.getReference("users/" + studentUid + "/role");
-        myRef5.setValue(userRole);
+        myRef5.setValue(Role);
 
         FirebaseDatabase database6 = FirebaseDatabase.getInstance();
         DatabaseReference myRef6 = database6.getReference("users/" + studentUid + "/uid");
@@ -106,15 +100,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myRef.setValue(insNum);
 
         //Write student to Firebase
-        FirebaseDatabase database1 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest + "/studentUid");
-        myRef1.setValue(studentUid);
+        FirebaseDatabase database9 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef9 = database9.getReference("tracks/" + insNum + timest + "/studentUid");
+        myRef9.setValue(studentUid);
 
         //Write timestamp to Firebase
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef2 = database.getReference("tracks/" + insNum + timest + "/timestamp");
+        DatabaseReference myRef2 = database2.getReference("tracks/" + insNum + timest + "/timestamp");
         myRef2.setValue(timest);
-
     }
 
     @Override
@@ -135,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
     }
-    protected synchronized void buildGoogleApiClient() {
+    private synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -146,7 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle bundle) {
-        mLocationRequest = new LocationRequest();
+        LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
@@ -169,16 +162,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
 
-        //Get user email
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String emailD = user != null ? user.getEmail() : null;
-
-        //Delete dots from email
-        String email = emailD != null ? emailD.replaceAll("\\.", "") : null;
-
-        //Get current location coordinates
+        //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         //Place start marker
@@ -187,30 +172,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.position(latLng);
             markerOptions.title("Start position");
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            mCurrLocationMarker = mMap.addMarker(markerOptions);
+            Marker mCurrLocationMarker = mMap.addMarker(markerOptions);
             startMarker++;
         }
 
-
         if (lastLoc != null) {
-            MapsActivity df = new MapsActivity();
-            distance = df.CalculationByDistance(latLng,lastLoc);
-            if (distance >100) {
-                PolylineOptions pLineOptions = new PolylineOptions()
-                        .clickable(true)
-                        .add(lastLoc)
-                        .add(latLng)
-                        .color(Color.GREEN);
-                Polyline polyline = mMap.addPolyline(pLineOptions);
-                lastLoc = latLng;
-            }else {
-                lastLoc = latLng;
-            }
-
+            PolylineOptions pLineOptions = new PolylineOptions()
+                    .clickable(true)
+                    .add(lastLoc)
+                    .add(latLng)
+                    .color(Color.GREEN);
+            Polyline polyline = mMap.addPolyline(pLineOptions);
+            lastLoc = latLng;
         } else {
             lastLoc = latLng;
         }
-
         startMarker++;
 
         //move map camera
@@ -222,14 +198,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest +  "/points/" + i++);
         myRef1.setValue(latLng);
 
-        //Save distance
-        FirebaseDatabase database4 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef4 = database4.getReference("tracks/" + insNum + timest +  "/points/" + i++);
-        myRef4.setValue(distance);
-
     }
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    public void checkLocationPermission(){
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private void checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -237,6 +208,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                // Prompt the user once explanation has been shown
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -267,43 +243,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
+
                     }
                 } else {
                     // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
             }
+        }
     }
-}
 
     public void finishRec(View view) {
-        DialogFr a = new DialogFr();
+        FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
-    }
-
-    public double CalculationByDistance(LatLng StartP, LatLng EndP) {
-        int Radius = 6371;// radius of earth in Km
-        double lat1 = StartP.latitude;
-        double lat2 = EndP.latitude;
-        double lon1 = StartP.longitude;
-        double lon2 = EndP.longitude;
-        double dLat = Math.toRadians(lat2 - lat1);
-        double dLon = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-                + Math.cos(Math.toRadians(lat1))
-                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
-                * Math.sin(dLon / 2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        double valueResult = Radius * c;
-        double km = valueResult / 1;
-        DecimalFormat newFormat = new DecimalFormat("####");
-        int kmInDec = Integer.valueOf(newFormat.format(km));
-        double meter = valueResult % 1000;
-        int meterInDec = Integer.valueOf(newFormat.format(meter));
-        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
-                + " Meter   " + meterInDec);
-
-        return valueResult * 1000;
     }
 
 }

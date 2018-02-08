@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListOfTracks"
+            android:name=".AfterLoginActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -60,7 +60,7 @@
             </intent-filter>-->
 
         </activity>
-        <activity android:name=".ContactUs"
+        <activity android:name=".ContactUsActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".InstructorChoose" />

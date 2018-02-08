@@ -11,7 +11,13 @@ import android.view.View;
 
 import bolts.AppLinks;
 
-public class ContactUs extends AppCompatActivity {
+
+//Ten klas opisuje działanie ekranu 'Contact us'
+//Pozwala zadzwonić do naszej siedzby, wysłać maila,
+//przejść do naszej strony internetowej, strony w Facebook
+//korzystając z nawigacji wyświetlić drogę do siedźby
+
+public class ContactUsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,7 @@ public class ContactUs extends AppCompatActivity {
         setContentView(R.layout.activity_contact_us);
     }
 
+    //Zadzwonić do naszego biura
     public void call(View view) {
         Intent i = new Intent(Intent.ACTION_DIAL);
         String p = "tel:" + getString(R.string.tel);
@@ -26,35 +33,37 @@ public class ContactUs extends AppCompatActivity {
         startActivity(i);
     }
 
+    //Wyslać email do nas
     public void sendEmail(View view) {
-        String a = "Podziękowanie";
-        String b = "Dziękuję bardzo za taką przepiękną appkę!!";
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto","ltrackerteam@email.com", null));
-        intent.putExtra(Intent.EXTRA_SUBJECT, a);
-        intent.putExtra(Intent.EXTRA_TEXT, b);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        intent.putExtra(Intent.EXTRA_TEXT,"Body");
         startActivity(Intent.createChooser(intent, "Choose an Email client :"));
     }
 
-    public void back(View view) {
+    //Wylogować się i wrócić do logowania
+    public void backToLogin(View view) {
         Intent intent = new Intent (this,MainActivity.class);
         startActivity(intent);
     }
 
-    public void map(View view) {
+    //Kieruje do naszego biura
+    public void getDirectionToUs(View view) {
         String uri = "http://maps.google.com/maps?daddr=" + 51.737557 + "," + 19.466653;
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }
 
-    public void web(View view) {
+    //Przekierowanie na nasza strone internetowa
+    public void redirectWebsite(View view) {
         Uri uri = Uri.parse("http://igorsmyrnov.pl/tracker");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
-
     }
 
-    public void facebook(View view) {
+    //Przekierowuje na nasza strone w Facebook
+    public void redirectFB(View view) {
         Uri uri = Uri.parse("http://facebook.com");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
