@@ -55,7 +55,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
@@ -63,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-        //Date and timestamp
+        //Data i timestamp
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timest = timestamp.getTime();
 
@@ -74,8 +73,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Get Uid of current instructor
         InstructorChoose a = new InstructorChoose();
-        insNum = a.backer();
+        insNum = a.getChoice();
 
+        //Dostaje email i Uid bieżącego usera
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
@@ -113,8 +113,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //Typ mapy
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
+        //Uprawnienia lokacji
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -139,6 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle bundle) {
+        //Określamy czas, przez który aplikacja ma sprawdzać lokalizację
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -175,7 +177,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Marker mCurrLocationMarker = mMap.addMarker(markerOptions);
             startMarker++;
         }
-
+        //Jeżeli nie ma poprzedniej lokacji, to ustawiamy marker startowy i ustawiamy bieżącą
+        // jako poprzedią
         if (lastLoc != null) {
             PolylineOptions pLineOptions = new PolylineOptions()
                     .clickable(true)

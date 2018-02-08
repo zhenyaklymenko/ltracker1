@@ -19,16 +19,15 @@ public class InstructorChoiceDialog extends DialogFragment {
         builder.setItems(R.array.instructors, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //Wczytuje wybur ucznia i wpisuje go do innego klasu
-
                 if (which == 0){
                     InstructorChoose a = new InstructorChoose();
-                    a.ins1();
+                    a.setChoice("ucBNQA1WR3SM5fUgNdniVumm67r2");
                 } if (which ==1){
                     InstructorChoose a = new InstructorChoose();
-                    a.ins2();
+                    a.setChoice("3AFbHnKxUkV5xuFlmBWZ57C0RcS2");
                 } else {
                     InstructorChoose a = new InstructorChoose();
-                    a.ins3();
+                    a.setChoice("8uuQvE4UofbkHdBarenVGlY7IkR2");
                 }
 
             }
