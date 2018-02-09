@@ -10,11 +10,10 @@ import android.support.v4.app.DialogFragment;
 //this class describes popup, which comes after pressing "finish" button
 
 public class FinishRaceDialog extends DialogFragment {
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-
 
         //using class "Builder" to build pop-up construction
         //taking ready to use "Alert Dialog" construction

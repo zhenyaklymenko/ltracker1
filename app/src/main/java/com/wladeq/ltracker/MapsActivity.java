@@ -35,7 +35,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
 
-
 // This class shows map and records position of a student
 //Position points are recorded to the database
 //button "Finish" stops the recording
@@ -52,7 +51,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng lastLoc = null;
     private String insNum;
     private long timest;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         InstructorChoose a = new InstructorChoose();
         insNum = a.getChoice();
 
-
-        // Getting email and uid of current studenr
+        // Getting email and uid of current student
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
@@ -157,12 +154,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override
@@ -180,8 +175,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Marker mCurrLocationMarker = mMap.addMarker(markerOptions);
             startMarker++;
         }
-        //Jeżeli nie ma poprzedniej lokacji, to ustawiamy marker startowy i ustawiamy bieżącą
-        // jako poprzedią
+
         // if there's no previous location, we place start marker and setting current marker as previous
         if (lastLoc != null) {
             PolylineOptions pLineOptions = new PolylineOptions()
@@ -215,12 +209,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                // Prompt the user once explanation has been shown
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -264,6 +252,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
     }
-
 }
 

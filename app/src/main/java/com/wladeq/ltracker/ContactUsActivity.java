@@ -11,8 +11,6 @@ import android.view.View;
 
 import bolts.AppLinks;
 
-
-
 //This class describes functioning of "contuct us" screen
 //allows to call to developers, send mail
 //proceed to our website, facebook page
@@ -27,7 +25,6 @@ public class ContactUsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_us);
     }
 
-
     //call to our office
     public void call(View view) {
         Intent i = new Intent(Intent.ACTION_DIAL);
@@ -35,7 +32,6 @@ public class ContactUsActivity extends AppCompatActivity {
         i.setData(Uri.parse(p));
         startActivity(i);
     }
-
 
     //send e-mail to us
     public void sendEmail(View view) {
@@ -46,13 +42,11 @@ public class ContactUsActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(intent, "Choose an Email client :"));
     }
 
-
     //logout and go back to login screen
     public void backToLogin(View view) {
         Intent intent = new Intent (this,MainActivity.class);
         startActivity(intent);
     }
-
 
     //navigation to our office
     public void getDirectionToUs(View view) {
