@@ -12,7 +12,7 @@ import com.firebase.ui.auth.AuthUI;
 // allows to proceed to "contuct us" screen or to "login" screen
 
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     // giving permissions
     private final static int LOGIN_PERMISSION=1000;

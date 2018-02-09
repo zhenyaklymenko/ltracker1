@@ -5,11 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-
 
 // this class describes the screen which shows up after login
 //it allows to choose instructor, to start recording of drive session and to logout
@@ -34,7 +29,7 @@ public class AfterLoginActivity extends AppCompatActivity {
 
     //this function is logging out current user (by pressing a button)
     public void logout(View view) {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,Login.class);
         startActivity(intent);
     }
 

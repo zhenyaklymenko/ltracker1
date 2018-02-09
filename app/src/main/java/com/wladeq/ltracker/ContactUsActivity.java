@@ -1,15 +1,10 @@
 package com.wladeq.ltracker;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import bolts.AppLinks;
 
 //This class describes functioning of "contuct us" screen
 //allows to call to developers, send mail
@@ -44,7 +39,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
     //logout and go back to login screen
     public void backToLogin(View view) {
-        Intent intent = new Intent (this,MainActivity.class);
+        Intent intent = new Intent (this,Login.class);
         startActivity(intent);
     }
 
