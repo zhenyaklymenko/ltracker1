@@ -8,61 +8,74 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+// this class describes login screen
+// allows to proceed to "contuct us" screen or to "login" screen
 
-//Ten klas opisuje początkowy ekran logowania
-//Pozwała na przejście do ekranu 'Contact us' albo do procesu logowania się
 
 public class MainActivity extends AppCompatActivity {
-    //Określiamy wartość uprawnień
+
+    // giving permissions
     private final static int LOGIN_PERMISSION=1000;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //Sprawdzamy czy dostaliśmy pozwolenie od systemu komórki na wyświetlenie logowania
+
+        //checking if we received permission to login
         if(requestCode==LOGIN_PERMISSION){
             startNewActivity(resultCode);
         }
     }
 
-    //Jeżeli klient się zalogował poprawnie, to wyświetłamy ekran 'AfterLoginActivity'
+
+    //if client login is successful, show "AfterLoginActivity" screen
     private void startNewActivity(int resultCode) {
-        //Sprawdzamy, czy logowanie się udało
+
+        // checking if login is successful
         if(resultCode==RESULT_OK){
-            //Ustawiamy, jaki klas ma się wyświetlić po zalogowaniu
+
+            //setting which screen to show next after login
             Intent intent = new Intent (this,AfterLoginActivity.class);
-            //Uruchomiamy ustawiony klas
+
+            //running class with set up settings
             startActivity(intent);
-            //Zamykamy process logowania
+
+            //closing login process
             finish();
         }
         else{
-            //Jeżeli logowanie jest nie udane, to na krótko pokazujemy komunikat 'Login failed'
+
+            // showing message "login failed" if login is not successful
 
             Toast.makeText(this,"Login failed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    //Ta funkcja zaczyna proces autenfikacji po kliknięciu przycisku
+
+    // starting authentication process after click on button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Szukamy przycisk
+
+        //finding button
         Button btnLogin = findViewById(R.id.btnSingIn);
 
-        //Określiamy funkjonalność przycisku
+
+        //describing what button should do
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 startActivityForResult(
-                        //Autentyfikacja jest realizowana za pomocą serwisów google
+
+                        //authentication is realised with the help of google services
                         AuthUI.getInstance().createSignInIntentBuilder()
                                 .setAllowNewEmailAccounts(false).build(),LOGIN_PERMISSION);
             }
         });
     }
-    //Przycisk umorzliwiający przejscie do ekranu 'Contact us'
+
+    // button which gives us ability to proceed to "contact us" screen
     public void contact(View view) {
         Intent intent = new Intent (this,ContactUsActivity.class);
         startActivity(intent);

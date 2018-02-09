@@ -35,9 +35,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
 
-//Ten klas wyświetła mapę i nagrywa lokację ucznia
-//punkty są zapisywane do bazy danych
-//przycisk 'Finish' kończy nagrywanie
+
+// This class shows map and records position of a student
+//Position points are recorded to the database
+//button "Finish" stops the recording
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -62,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-        //Data i timestamp
+        //Data and timestamp
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timest = timestamp.getTime();
 
@@ -71,11 +72,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //Get Uid of current instructor
+        //Getting Uid of current instructor
         InstructorChoose a = new InstructorChoose();
         insNum = a.getChoice();
 
-        //Dostaje email i Uid bieżącego usera
+
+        // Getting email and uid of current studenr
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
@@ -113,9 +115,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //Typ mapy
+        //type of the map
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        //Uprawnienia lokacji
+        //Location settings
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -140,7 +142,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle bundle) {
-        //Określamy czas, przez który aplikacja ma sprawdzać lokalizację
+
+        // defining time period, after which application will check the location
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -179,6 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         //Jeżeli nie ma poprzedniej lokacji, to ustawiamy marker startowy i ustawiamy bieżącą
         // jako poprzedią
+        // if there's no previous location, we place start marker and setting current marker as previous
         if (lastLoc != null) {
             PolylineOptions pLineOptions = new PolylineOptions()
                     .clickable(true)

@@ -10,31 +10,36 @@ import java.util.HashMap;
 import java.util.List;
 
 
-//Ten klas opisuje ekran, który się wyświetła po zalogowaniu
-//Pozwałą wybrać instruktora, zacząć nagrywanie jazdy i wylogować się
+
+// this class describes the screen which shows up after login
+//it allows to choose instructor, to start recording of drive session and to logout
 
 public class AfterLoginActivity extends AppCompatActivity {
 
-    //Ta funkcja wyświetła xml layout 'activity_after_login'
+
+    //function shows xml layout "activity_after_login"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_login);
     }
 
-    //Ta funkcja zaczyna nagrywanie (przycisk)
+
+    // this function starts recording (by pressing a button)
     public void letsStart(View view) {
         Intent intent = new Intent (this,MapsActivity.class);
         startActivity(intent);
     }
 
-    //Ta funkcja wylogowuje bieżącego użytkownika (przycisk)
+
+    //this function is logging out current user (by pressing a button)
     public void logout(View view) {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 
-    //Ta funkcja pozwala na wybranie instruktora (przycisk)
+
+    //this function allows to choose the instructor with a button
     public void instructorChoiceDialog(View view) {
         InstructorChoiceDialog a = new InstructorChoiceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");

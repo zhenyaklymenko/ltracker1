@@ -6,31 +6,37 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-//Ten klas opisuje popup, który jest wyświetłany, gdy user wciska
-// przycisk 'Finish'
+
+//this class describes popup, which comes after pressing "finish" button
 
 public class FinishRaceDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        // Korzystamy z klasu 'Builder' żeby zbudować konstrukcję popup-u
-        // bierzemy gotową kontrukcję 'AlertDialog'
+
+
+        //using class "Builder" to build pop-up construction
+        //taking ready to use "Alert Dialog" construction
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Do you want to finish race?")
                 .setPositiveButton("Finish", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //Jeżeli zatwierdza, że chce zakończyć nagrywanie,
-                        //zamykamy bieżący klas (nagrywanie się zatrzymuje)
+
+                        //closing current class if user wants to stop recording
+
                         System.exit(0);
                     }
                 })
-                //Jeżeli user wciska 'Cancel', zamykamy popup
+
+                //closing popup if user presses "cancel"
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
-        // Tworzymy 'AlertDialog' i zwracamy go w miejscie, gdzie został wywolany
+
+        // creating "AlertDialog" and returning it where it was called
         return builder.create();
     }
 }

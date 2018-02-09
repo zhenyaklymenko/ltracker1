@@ -1,7 +1,8 @@
 package com.wladeq.ltracker;
 import android.support.v7.app.AppCompatActivity;
 
-//Klas, który dostaje wartość od usera i póżniej ją otdaje
+
+// class, which takes the choice of user and returns it  later
 public class InstructorChoose extends AppCompatActivity{
     static String choice;
     public String getChoice() {
