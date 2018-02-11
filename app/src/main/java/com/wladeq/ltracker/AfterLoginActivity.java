@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 
 // this class describes the screen which shows up after login
@@ -38,5 +39,10 @@ public class AfterLoginActivity extends AppCompatActivity {
     public void instructorChoiceDialog(View view) {
         InstructorChoiceDialog a = new InstructorChoiceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
+    }
+    @Override
+    public void onBackPressed() {
+        Toast toast = Toast.makeText(this, "Press 'Logout' to exit", Toast.LENGTH_LONG);
+        toast.show();
     }
 }

@@ -19,20 +19,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
+        android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="@+id/button5"
         app:layout_constraintStart_toStartOf="@+id/button5"
         app:layout_constraintTop_toTopOf="@+id/button5"
-        app:srcCompat="@drawable/sign_out"
-        android:contentDescription="@string/app_name" />
+        app:srcCompat="@drawable/sign_out" />
 
     <Button
         android:id="@+id/btnSingIn"
-        android:layout_width="281dp"
-        android:layout_height="78dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@drawable/login"
         android:fontFamily="@font/bkant_bold"
@@ -47,18 +49,20 @@
 
     <Button
         android:id="@+id/btnInstructorChoice"
-        android:layout_width="281dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/login"
         android:fontFamily="@font/bkant_bold"
         android:onClick="instructorChoiceDialog"
         android:text="@string/choose_an_instructor"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSingIn"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintVertical_bias="0.95" />
 
 </android.support.constraint.ConstraintLayout>

@@ -250,6 +250,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast toast = Toast.makeText(this, "Press 'FINISH RACE' to stop recording", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
     public void finishRec(View view) {
         FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
