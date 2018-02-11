@@ -1,15 +1,20 @@
 package com.wladeq.ltracker;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
 
@@ -50,9 +55,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int i=1;
     private int startMarker;
     private LatLng lastLoc = null;
-    private String insNum;
-    private long timest;
-    UUID trackUid=UUID.randomUUID();
+
+    //generate UID to name current track record
+    String trackUid = UUID.randomUUID().toString();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         //Data and timestamp
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        timest = timestamp.getTime();
+        long timest = timestamp.getTime();
 
         //Find where we should show the map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -74,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Getting Uid of current instructor
         InstructorChoose a = new InstructorChoose();
-        insNum = a.getChoice();
+        String insNum = a.getChoice();
 
         // Getting email and uid of current student
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -250,12 +256,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //Disable 'back' button
     @Override
     public void onBackPressed() {
         Toast toast = Toast.makeText(this, "Press 'FINISH RACE' to stop recording", Toast.LENGTH_LONG);
         toast.show();
     }
 
+    //Finish Record
     public void finishRec(View view) {
         FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
