@@ -29,7 +29,7 @@ public class AfterLoginActivity extends AppCompatActivity {
 
     //this function is logging out current user (by pressing a button)
     public void logout(View view) {
-        Intent intent = new Intent(this,Login.class);
+        Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
 

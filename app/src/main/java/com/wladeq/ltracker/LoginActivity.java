@@ -12,7 +12,7 @@ import com.firebase.ui.auth.AuthUI;
 // allows to proceed to "contuct us" screen or to "login" screen
 
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     // giving permissions
     private final static int LOGIN_PERMISSION=1000;
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
 
             // showing message "login failed" if login is not successful
 
-            Toast.makeText(this,"Login failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"LoginActivity failed", Toast.LENGTH_SHORT).show();
         }
     }
 

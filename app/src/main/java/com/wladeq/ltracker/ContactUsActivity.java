@@ -39,7 +39,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
     //logout and go back to login screen
     public void backToLogin(View view) {
-        Intent intent = new Intent (this,Login.class);
+        Intent intent = new Intent (this,LoginActivity.class);
         startActivity(intent);
     }
 

@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 // This class shows map and records position of a student
 //Position points are recorded to the database
@@ -51,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng lastLoc = null;
     private String insNum;
     private long timest;
+    UUID trackUid=UUID.randomUUID();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +97,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Write instructor to FireBase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("tracks/" + insNum + timest + "/instructorUid");
+        DatabaseReference myRef = database.getReference("tracks/" + trackUid + "/instructorUid");
         myRef.setValue(insNum);
 
         //Write student to Firebase
         FirebaseDatabase database9 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef9 = database9.getReference("tracks/" + insNum + timest + "/studentUid");
+        DatabaseReference myRef9 = database9.getReference("tracks/" + trackUid + "/studentUid");
         myRef9.setValue(studentUid);
 
         //Write timestamp to Firebase
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef2 = database2.getReference("tracks/" + insNum + timest + "/timestamp");
+        DatabaseReference myRef2 = database2.getReference("tracks/" + trackUid + "/timestamp");
         myRef2.setValue(timest);
     }
 
@@ -196,7 +198,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Save dots to firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest +  "/points/" + i++);
+        DatabaseReference myRef1 = database.getReference("tracks/" + trackUid +  "/points/" + i++);
         myRef1.setValue(latLng);
 
     }
