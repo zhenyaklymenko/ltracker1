@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tlo"
-    tools:context="com.wladeq.ltracker.LoginActivity">
+    tools:context="com.wladeq.ltracker.LoginActivity"
+    tools:ignore="Overdraw">
 
     <Button
-        android:id="@+id/btnContactUs"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginBottom="25dp"

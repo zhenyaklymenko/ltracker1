@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_race_page"
-    tools:context="com.wladeq.ltracker.AfterLoginActivity">
+    tools:context="com.wladeq.ltracker.AfterLoginActivity"
+    tools:ignore="Overdraw">
 
     <Button
         android:id="@+id/button5"
@@ -21,7 +22,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
@@ -48,7 +48,6 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/btnInstructorChoice"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -1,20 +1,15 @@
 package com.wladeq.ltracker;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
 
@@ -57,7 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng lastLoc = null;
 
     //generate UID to name current track record
-    String trackUid = UUID.randomUUID().toString();
+    private final String trackUid = UUID.randomUUID().toString();
 
 
     @Override

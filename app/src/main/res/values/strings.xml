@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Ltracker</string>
     <string name="title_activity_maps">Map</string>
-    <string name="lets_start">Let\'s start!</string>
-    <string name="my_previous_rides">My previous rides:</string>
     <string name="login">LOGIN</string>
     <string name="contact_us">CONTACT US</string>
     <string name="contact_us_btn">Contact us</string>
@@ -11,10 +9,8 @@
     <string name="meil">ltrackerteam@gmail.com</string>
     <string name="ltacker_pl">ltacker.pl</string>
     <string name="adres">Take me there!</string>
-    <string name="track_list">Track list</string>
     <string name="start_race">Start race</string>
     <string name="dialog_choose_instructor">Please choose your current instructor:</string>
-    <string name="fire">OK</string>
     <string name="cancel">Cancel</string>
     <string name="finish_race">Finish Race</string>
     <string name="choose_an_instructor">Choose an instructor (optional)</string>

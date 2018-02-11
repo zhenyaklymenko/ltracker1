@@ -2,8 +2,8 @@ package com.wladeq.ltracker;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 //This class describes functioning of "contuct us" screen
