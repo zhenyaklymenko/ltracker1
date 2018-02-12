@@ -34,6 +34,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+<<<<<<< HEAD
+=======
+import java.util.UUID;
+
+// This class shows map and records position of a student
+//Position points are recorded to the database
+//button "Finish" stops the recording
+>>>>>>> refs/remotes/origin/master
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -45,13 +53,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int i=1;
     private int startMarker;
     private LatLng lastLoc = null;
+<<<<<<< HEAD
     private String insNum;
     private long timest;
+=======
+
+    //generate UID to name current track record
+    private final String trackUid = UUID.randomUUID().toString();
+>>>>>>> refs/remotes/origin/master
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
@@ -59,19 +72,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+<<<<<<< HEAD
         //Date and timestamp
+=======
+        //Data and timestamp
+>>>>>>> refs/remotes/origin/master
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        timest = timestamp.getTime();
+        long timest = timestamp.getTime();
 
         //Find where we should show the map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //Get Uid of current instructor
+        //Getting Uid of current instructor
         InstructorChoose a = new InstructorChoose();
-        insNum = a.backer();
+        String insNum = a.getChoice();
 
+        // Getting email and uid of current student
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String studentUid = user != null ? user.getUid() : null;
         String userEmail = user != null ? user.getEmail() : null;
@@ -92,25 +110,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Write instructor to FireBase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("tracks/" + insNum + timest + "/instructorUid");
+        DatabaseReference myRef = database.getReference("tracks/" + trackUid + "/instructorUid");
         myRef.setValue(insNum);
 
         //Write student to Firebase
         FirebaseDatabase database9 = FirebaseDatabase.getInstance();
+<<<<<<< HEAD
         DatabaseReference myRef9 = database9.getReference("tracks/" + insNum + timest + "/studentUid");
+=======
+        DatabaseReference myRef9 = database9.getReference("tracks/" + trackUid + "/studentUid");
+>>>>>>> refs/remotes/origin/master
         myRef9.setValue(studentUid);
 
         //Write timestamp to Firebase
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+<<<<<<< HEAD
         DatabaseReference myRef2 = database2.getReference("tracks/" + insNum + timest + "/timestamp");
+=======
+        DatabaseReference myRef2 = database2.getReference("tracks/" + trackUid + "/timestamp");
+>>>>>>> refs/remotes/origin/master
         myRef2.setValue(timest);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //type of the map
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
+        //Location settings
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -135,6 +162,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle bundle) {
+<<<<<<< HEAD
+=======
+
+        // defining time period, after which application will check the location
+>>>>>>> refs/remotes/origin/master
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -148,12 +180,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override
@@ -172,6 +202,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startMarker++;
         }
 
+        // if there's no previous location, we place start marker and setting current marker as previous
         if (lastLoc != null) {
             PolylineOptions pLineOptions = new PolylineOptions()
                     .clickable(true)
@@ -191,7 +222,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Save dots to firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef1 = database.getReference("tracks/" + insNum + timest +  "/points/" + i++);
+        DatabaseReference myRef1 = database.getReference("tracks/" + trackUid +  "/points/" + i++);
         myRef1.setValue(latLng);
 
     }
@@ -204,12 +235,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                // Prompt the user once explanation has been shown
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -239,19 +264,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
+
                     }
                 } else {
                     // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
             }
+        }
     }
+<<<<<<< HEAD
 }
 
     public void finishRec(View view) {
         FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
+=======
+
+    //Disable 'back' button
+    @Override
+    public void onBackPressed() {
+        Toast toast = Toast.makeText(this, "Press 'FINISH RACE' to stop recording", Toast.LENGTH_LONG);
+        toast.show();
+>>>>>>> refs/remotes/origin/master
     }
 
+    //Finish Record
+    public void finishRec(View view) {
+        FinishRaceDialog a = new FinishRaceDialog();
+        a.show(getSupportFragmentManager(), "Instructor choice");
+    }
 }
 

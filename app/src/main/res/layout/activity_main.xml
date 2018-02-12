@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tlo"
-    tools:context="com.wladeq.ltracker.MainActivity">
+    tools:context="com.wladeq.ltracker.LoginActivity"
+    tools:ignore="Overdraw">
 
     <Button
         android:layout_width="250dp"

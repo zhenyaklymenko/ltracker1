@@ -13,5 +13,9 @@
     <string name="dialog_choose_instructor">Please choose your current instructor:</string>
     <string name="cancel">Cancel</string>
     <string name="finish_race">Finish Race</string>
+<<<<<<< HEAD
     <string name="finish_race_1">Do you want to finish record?</string>>
+=======
+    <string name="choose_an_instructor">Choose an instructor (optional)</string>
+>>>>>>> refs/remotes/origin/master
 </resources>
