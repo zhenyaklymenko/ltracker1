@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startNewActivity(int resultCode) {
         if(resultCode==RESULT_OK){
-            Intent intent = new Intent (this,ListOfTracks.class);
+            Intent intent = new Intent (this,AfterLoginActivity.class);
             startActivity(intent);
             finish();
         }

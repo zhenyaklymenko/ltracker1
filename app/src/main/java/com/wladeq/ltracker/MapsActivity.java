@@ -249,7 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 }
 
     public void finishRec(View view) {
-        CustomDialFrag a = new CustomDialFrag();
+        FinishRaceDialog a = new FinishRaceDialog();
         a.show(getSupportFragmentManager(), "Instructor choice");
     }
 
